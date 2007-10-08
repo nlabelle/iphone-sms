@@ -1,0 +1,454 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+ADDENV	shttpd.c	2827;"	d	file:
+AUTH_MAX	shttpd.c	45;"	d	file:
+Argc	shttpd.c	/^static int		Argc;		\/* argc passed to main() *\/$/;"	v	file:
+Argv	shttpd.c	/^static char		**Argv;		\/* argv passed to main() *\/$/;"	v	file:
+BOOL_OPT	shttpd.c	780;"	d	file:
+BYTES_TO_OUTPUT	embed/example.c	121;"	d	file:
+CGI_EXT	shttpd.c	49;"	d	file:
+CNTService	embed/example_nt_service.cpp	/^CNTService::CNTService(const char* szServiceName)$/;"	f	class:CNTService
+CNTService	embed/example_nt_service.cpp	/^class CNTService$/;"	c	file:
+CONFIG	shttpd.c	37;"	d	file:
+DIR	shttpd.c	/^typedef struct DIR {$/;"	s	file:
+DIR	shttpd.c	/^} DIR;$/;"	t	file:
+DIRSEP	shttpd.c	114;"	d	file:
+DIRSEP	shttpd.c	74;"	d	file:
+DlgProc	shttpd.c	/^DlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)$/;"	f
+ENV_MAX	shttpd.c	51;"	d	file:
+ERRNO	shttpd.c	117;"	d	file:
+ERRNO	shttpd.c	68;"	d	file:
+ERR_DEBUG	shttpd.c	/^enum err_level	{ERR_DEBUG, ERR_INFO, ERR_FATAL};$/;"	e	enum:err_level	file:
+ERR_FATAL	shttpd.c	/^enum err_level	{ERR_DEBUG, ERR_INFO, ERR_FATAL};$/;"	e	enum:err_level	file:
+ERR_INFO	shttpd.c	/^enum err_level	{ERR_DEBUG, ERR_INFO, ERR_FATAL};$/;"	e	enum:err_level	file:
+EWOULDBLOCK	shttpd.c	77;"	d	file:
+EXPIRE_TIME	shttpd.c	40;"	d	file:
+EnterCriticalSection	shttpd.c	121;"	d	file:
+F1	shttpd.c	2055;"	d	file:
+F2	shttpd.c	2056;"	d	file:
+F3	shttpd.c	2057;"	d	file:
+F4	shttpd.c	2058;"	d	file:
+FLAG_ALWAYS_READY	shttpd.c	267;"	d	file:
+FLAG_CGI	shttpd.c	273;"	d	file:
+FLAG_CGIPARSED	shttpd.c	265;"	d	file:
+FLAG_FD_READABLE	shttpd.c	271;"	d	file:
+FLAG_FD_WRITABLE	shttpd.c	272;"	d	file:
+FLAG_FINISHED	shttpd.c	263;"	d	file:
+FLAG_IO_READY	shttpd.c	276;"	d	file:
+FLAG_PARSED	shttpd.c	264;"	d	file:
+FLAG_SOCK_READABLE	shttpd.c	269;"	d	file:
+FLAG_SOCK_WRITABLE	shttpd.c	270;"	d	file:
+FLAG_SSLACCEPTED	shttpd.c	266;"	d	file:
+FLAG_USER_WATCH	shttpd.c	268;"	d	file:
+FUNC	shttpd.c	335;"	d	file:
+HDR_DATE	shttpd.c	/^enum hdr_type	{HDR_DATE, HDR_INT, HDR_STRING};$/;"	e	enum:hdr_type	file:
+HDR_INT	shttpd.c	/^enum hdr_type	{HDR_DATE, HDR_INT, HDR_STRING};$/;"	e	enum:hdr_type	file:
+HDR_STRING	shttpd.c	/^enum hdr_type	{HDR_DATE, HDR_INT, HDR_STRING};$/;"	e	enum:hdr_type	file:
+HEIGHT	shttpd.c	3911;"	d	file:
+HEXTOI	shttpd.c	1898;"	d	file:
+HTPASSWD	shttpd.c	39;"	d	file:
+Handler	embed/example_nt_service.cpp	/^void CNTService::Handler(DWORD dwOpcode)$/;"	f	class:CNTService
+ID_DELTA	shttpd.c	3695;"	d	file:
+ID_GROUP	shttpd.c	3685;"	d	file:
+ID_ICON	shttpd.c	3693;"	d	file:
+ID_QUIT	shttpd.c	3690;"	d	file:
+ID_SAVE	shttpd.c	3686;"	d	file:
+ID_SETTINGS	shttpd.c	3689;"	d	file:
+ID_STATIC	shttpd.c	3688;"	d	file:
+ID_STATUS	shttpd.c	3687;"	d	file:
+ID_TIMER	shttpd.c	3692;"	d	file:
+ID_TRAYICON	shttpd.c	3691;"	d	file:
+ID_USER	shttpd.c	3694;"	d	file:
+INCREMENT_KB	shttpd.c	1384;"	d	file:
+INDEX_FILES	shttpd.c	48;"	d	file:
+IO_DATALEN	shttpd.c	206;"	d	file:
+IO_MAX	shttpd.c	42;"	d	file:
+IO_SPACELEN	shttpd.c	205;"	d	file:
+Init	embed/example_nt_service.cpp	/^BOOL CNTService::Init()$/;"	f	class:CNTService
+Initialize	embed/example_nt_service.cpp	/^BOOL CNTService::Initialize()$/;"	f	class:CNTService
+InitializeCriticalSection	shttpd.c	120;"	d	file:
+Install	embed/example_nt_service.cpp	/^BOOL CNTService::Install()$/;"	f	class:CNTService
+IsInstalled	embed/example_nt_service.cpp	/^BOOL CNTService::IsInstalled()$/;"	f	class:CNTService
+LABEL_WIDTH	shttpd.c	3913;"	d	file:
+LSIZ	shttpd.c	2314;"	d	file:
+LeaveCriticalSection	shttpd.c	122;"	d	file:
+MAX_CONNECTIONS_PER_THREAD	embed/scalable.c	6;"	d	file:
+MD5STEP	shttpd.c	2061;"	d	file:
+MERGEFD	shttpd.c	3422;"	d	file:
+METHOD_DELETE	shttpd.c	/^enum {METHOD_GET, METHOD_POST, METHOD_PUT, METHOD_DELETE, METHOD_HEAD};$/;"	e	file:
+METHOD_GET	shttpd.c	/^enum {METHOD_GET, METHOD_POST, METHOD_PUT, METHOD_DELETE, METHOD_HEAD};$/;"	e	file:
+METHOD_HEAD	shttpd.c	/^enum {METHOD_GET, METHOD_POST, METHOD_PUT, METHOD_DELETE, METHOD_HEAD};$/;"	e	file:
+METHOD_POST	shttpd.c	/^enum {METHOD_GET, METHOD_POST, METHOD_PUT, METHOD_DELETE, METHOD_HEAD};$/;"	e	file:
+METHOD_PUT	shttpd.c	/^enum {METHOD_GET, METHOD_POST, METHOD_PUT, METHOD_DELETE, METHOD_HEAD};$/;"	e	file:
+NELEMS	shttpd.c	53;"	d	file:
+NO_GUI	shttpd.c	118;"	d	file:
+NO_SOCKLEN_T	shttpd.c	69;"	d	file:
+NVAR_MAX	shttpd.c	46;"	d	file:
+OFFSET	shttpd.c	285;"	d	file:
+OFS	shttpd.c	779;"	d	file:
+OPT_FLAG_BOOL	shttpd.c	442;"	d	file:
+OPT_FLAG_DIR	shttpd.c	445;"	d	file:
+OPT_FLAG_FILE	shttpd.c	444;"	d	file:
+OPT_FLAG_INT	shttpd.c	443;"	d	file:
+O_BINARY	shttpd.c	115;"	d	file:
+O_NONBLOCK	shttpd.c	75;"	d	file:
+Open	shttpd.c	/^Open(const char *path, int flags, int mode)$/;"	f	file:
+PORT	shttpd.c	47;"	d	file:
+REALM	shttpd.c	50;"	d	file:
+Run	embed/example_nt_service.cpp	/^void CNTService::Run()$/;"	f	class:CNTService
+SHTTPD_HEADER_INCLUDED	embed/shttpd.h	24;"	d
+SHTTPD_SERVICE_NAME	embed/example_nt_service.cpp	3;"	d	file:
+SSL	shttpd.c	/^typedef struct ssl_st SSL;$/;"	t	file:
+SSL_CTX	shttpd.c	/^typedef struct ssl_ctx_st SSL_CTX;$/;"	t	file:
+SSL_CTX_new	shttpd.c	345;"	d	file:
+SSL_CTX_use_PrivateKey_file	shttpd.c	348;"	d	file:
+SSL_CTX_use_certificate_file	shttpd.c	350;"	d	file:
+SSL_ERROR_WANT_READ	shttpd.c	166;"	d	file:
+SSL_ERROR_WANT_WRITE	shttpd.c	167;"	d	file:
+SSL_FILETYPE_PEM	shttpd.c	168;"	d	file:
+SSL_LIB	shttpd.c	113;"	d	file:
+SSL_LIB	shttpd.c	70;"	d	file:
+SSL_METHOD	shttpd.c	/^typedef struct ssl_method_st SSL_METHOD;$/;"	t	file:
+SSL_accept	shttpd.c	337;"	d	file:
+SSL_connect	shttpd.c	338;"	d	file:
+SSL_free	shttpd.c	336;"	d	file:
+SSL_get_error	shttpd.c	342;"	d	file:
+SSL_library_init	shttpd.c	347;"	d	file:
+SSL_new	shttpd.c	344;"	d	file:
+SSL_read	shttpd.c	339;"	d	file:
+SSL_set_fd	shttpd.c	343;"	d	file:
+SSL_write	shttpd.c	340;"	d	file:
+SSLv23_server_method	shttpd.c	346;"	d	file:
+S_ISDIR	shttpd.c	73;"	d	file:
+ServiceMain	embed/example_nt_service.cpp	/^void CNTService::ServiceMain(DWORD dwArgc, LPTSTR* lpszArgv)$/;"	f	class:CNTService
+SetStatus	embed/example_nt_service.cpp	/^void CNTService::SetStatus(DWORD dwState)$/;"	f	class:CNTService
+Snprintf	shttpd.c	/^Snprintf(char *buf, size_t buflen, const char *fmt, ...)$/;"	f	file:
+StartService	embed/example_nt_service.cpp	/^BOOL CNTService::StartService()$/;"	f	class:CNTService
+Stat	shttpd.c	/^Stat(const char *path, struct stat *stp)$/;"	f	file:
+USER_MAX	shttpd.c	44;"	d	file:
+Uninstall	embed/example_nt_service.cpp	/^BOOL CNTService::Uninstall()$/;"	f	class:CNTService
+VERSION	shttpd.c	35;"	d	file:
+WIDTH	shttpd.c	3912;"	d	file:
+WindowProc	shttpd.c	/^WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)$/;"	f	file:
+_MD5Context	shttpd.c	/^typedef struct _MD5Context {$/;"	s	file:
+_MD5Final	shttpd.c	/^_MD5Final(unsigned char digest[16], _MD5_CTX *ctx)$/;"	f	file:
+_MD5Init	shttpd.c	/^static void _MD5Init(_MD5_CTX *ctx)$/;"	f	file:
+_MD5Transform	shttpd.c	/^static void _MD5Transform(uint32_t buf[4], uint32_t const in[16])$/;"	f	file:
+_MD5Update	shttpd.c	/^_MD5Update(_MD5_CTX *ctx, unsigned char const *buf, unsigned len)$/;"	f	file:
+_MD5_CTX	shttpd.c	/^} _MD5_CTX;$/;"	t	file:
+_POSIX_	shttpd.c	83;"	d	file:
+accesslog	shttpd.c	/^	FILE		*accesslog;		\/* Access log stream *\/$/;"	m	struct:shttpd_ctx	file:
+add_conn_to_ctx	shttpd.c	/^add_conn_to_ctx(struct shttpd_ctx *ctx, struct conn *c)$/;"	f	file:
+add_control	shttpd.c	/^add_control(char **mem, DLGTEMPLATE *dia, DWORD type, DWORD id, DWORD style,$/;"	f	file:
+addenv	shttpd.c	/^addenv(char **env, int *len, char **penv, const char *fmt, const char *val)$/;"	f	file:
+align	shttpd.c	/^align(void *ptr, DWORD alig)$/;"	f	file:
+arg	shttpd.c	/^	const char	*arg;			\/* Argument format *\/$/;"	m	struct:opt	file:
+auth	shttpd.c	/^	char		*auth;		\/* Authorization		*\/$/;"	m	struct:conn	file:
+authorize	shttpd.c	/^authorize(struct conn *c, FILE *fp)$/;"	f	file:
+auths	shttpd.c	/^	struct userauth	*auths;			\/* User auth files *\/$/;"	m	struct:shttpd_ctx	file:
+bin2str	shttpd.c	/^bin2str(char *to, const unsigned char *p, size_t len)$/;"	f	file:
+birth	shttpd.c	/^	time_t		birth;		\/* Creation time		*\/$/;"	m	struct:conn	file:
+bits	shttpd.c	/^	uint32_t	bits[2];$/;"	m	struct:_MD5Context	file:
+buf	embed/shttpd.h	/^	char		*buf;		\/* Buffer to fill *\/$/;"	m	struct:shttpd_arg_t
+buf	shttpd.c	/^	char	buf[IO_MAX];		\/* Buffer		*\/$/;"	m	struct:io	file:
+buf	shttpd.c	/^	uint32_t	buf[4];$/;"	m	struct:_MD5Context	file:
+buflen	embed/shttpd.h	/^	size_t		buflen;		\/* Buffer length *\/$/;"	m	struct:shttpd_arg_t
+byteReverse	shttpd.c	/^static void byteReverse(unsigned char *buf, unsigned longs)$/;"	f	file:
+byteReverse	shttpd.c	2035;"	d	file:
+casecmp	shttpd.c	/^casecmp(register const char *s1, register const char *s2)$/;"	f	file:
+cclength	shttpd.c	/^	unsigned long	cclength;	\/* Client Content-Length	*\/$/;"	m	struct:conn	file:
+cgiparse	shttpd.c	/^cgiparse(struct conn *c)$/;"	f	file:
+checkauth	shttpd.c	/^checkauth(struct conn *c, const char *path)$/;"	f	file:
+checkpass	shttpd.c	/^checkpass(const struct conn *c, const char *a1, const struct digest *dig)$/;"	f	file:
+closedir	shttpd.c	/^closedir(DIR *dir)$/;"	f	file:
+closesocket	shttpd.c	116;"	d	file:
+cnonce	shttpd.c	/^	char		cnonce[64];$/;"	m	struct:digest	file:
+config_file	shttpd.c	/^static const char	*config_file;	\/* Configuration file *\/$/;"	v	file:
+conn	shttpd.c	/^struct conn {$/;"	s	file:
+connections	shttpd.c	/^	struct conn	*connections;		\/* List of connections *\/$/;"	m	struct:shttpd_ctx	file:
+cookie	shttpd.c	/^	char		*cookie;	\/* Cookie:			*\/$/;"	m	struct:conn	file:
+create_new_context	embed/scalable.c	/^create_new_context(void)$/;"	f	file:
+ctx	embed/scalable.c	/^	struct shttpd_ctx	*ctx;$/;"	m	struct:thread	file:
+ctx	shttpd.c	/^	struct shttpd_ctx *ctx;		\/* Context this conn belongs to *\/$/;"	m	struct:conn	file:
+ctype	shttpd.c	/^	char		*ctype;		\/* Content-Type:		*\/$/;"	m	struct:conn	file:
+current_time	shttpd.c	/^static time_t		current_time;	\/* No need to keep per-context time *\/$/;"	v	file:
+d_name	shttpd.c	/^	char	*d_name;$/;"	m	struct:dirent	file:
+data	shttpd.c	/^	void			*data;$/;"	m	struct:userurl	file:
+datetosec	shttpd.c	/^datetosec(const char *s)$/;"	f	file:
+debug	shttpd.c	/^	int		debug;			\/* Debug flag *\/$/;"	m	struct:shttpd_ctx	file:
+debug	shttpd.c	/^static int		debug;		\/* Show debug messages *\/$/;"	v	file:
+def	shttpd.c	/^	const char	*def;			\/* Default option value *\/$/;"	m	struct:opt	file:
+del_conn_from_ctx	shttpd.c	/^del_conn_from_ctx(struct shttpd_ctx *ctx, struct conn *c)$/;"	f	file:
+desc	shttpd.c	/^	const char	*desc;			\/* Description *\/$/;"	m	struct:opt	file:
+digest	shttpd.c	/^struct digest {$/;"	s	file:
+dirent	shttpd.c	/^struct dirent {$/;"	s	file:
+dirlist	shttpd.c	/^	int		dirlist;		\/* Directory listing *\/$/;"	m	struct:shttpd_ctx	file:
+dirp	shttpd.c	/^	DIR		*dirp;		\/* Opened directory		*\/$/;"	m	struct:conn	file:
+disconnect	shttpd.c	/^disconnect(struct conn *c)$/;"	f	file:
+dlopen	shttpd.c	81;"	d	file:
+dlsym	shttpd.c	82;"	d	file:
+do_accept	shttpd.c	/^do_accept(struct shttpd_ctx *ctx, void *ptr)$/;"	f	file:
+do_dir	shttpd.c	/^do_dir(struct conn *c)$/;"	f	file:
+do_embedded	shttpd.c	/^do_embedded(struct conn *c)$/;"	f	file:
+do_embedded	shttpd.c	/^static void do_embedded(struct conn *c) { c->local.done++; }$/;"	f	file:
+do_get	shttpd.c	/^do_get(struct conn *c)$/;"	f	file:
+do_init	shttpd.c	/^do_init(const char *config_file, int argc, char *argv[])$/;"	f
+done	shttpd.c	/^	int	done;			\/* IO finished		*\/$/;"	m	struct:io	file:
+editpass	shttpd.c	/^editpass(const char *fname, const char *domain,$/;"	f	file:
+elog	shttpd.c	/^elog(enum err_level level, const char *fmt, ...)$/;"	f	file:
+envvar	shttpd.c	/^struct envvar {$/;"	s	file:
+envvars	shttpd.c	/^	struct envvar	*envvars;		\/* CGI environment variables *\/$/;"	m	struct:shttpd_ctx	file:
+err_level	shttpd.c	/^enum err_level	{ERR_DEBUG, ERR_INFO, ERR_FATAL};$/;"	g	file:
+errorlog	shttpd.c	/^	FILE		*errorlog;		\/* Error log stream *\/$/;"	m	struct:shttpd_ctx	file:
+ev	shttpd.c	/^	HANDLE		ev[2];			\/* For thread synchronization *\/$/;"	m	struct:shttpd_ctx	file:
+exit_flag	shttpd.c	/^static int		exit_flag;	\/* Exit flag *\/$/;"	v	file:
+expire	shttpd.c	/^	time_t		expire;		\/* Expiration time		*\/$/;"	m	struct:conn	file:
+ext	shttpd.c	/^	char		*ext;			\/* CGI extention *\/$/;"	m	struct:shttpd_ctx	file:
+ext	shttpd.c	/^	char		*ext;		\/* File extention	*\/$/;"	m	struct:mimetype	file:
+extlen	shttpd.c	/^	size_t		extlen;		\/* Extention length	*\/$/;"	m	struct:mimetype	file:
+fd	shttpd.c	/^	int		fd;		\/* Local file descriptor	*\/$/;"	m	struct:conn	file:
+fetch	shttpd.c	/^fetch(const char *src, char *dst, size_t len)$/;"	f	file:
+fetchfield	shttpd.c	/^fetchfield(const char **from, char *to, int len, int shift)$/;"	f	file:
+filename	shttpd.c	/^	const char		*filename;$/;"	m	struct:userauth	file:
+find_not_busy_thread	embed/scalable.c	/^find_not_busy_thread(void)$/;"	f	file:
+fix_directory_separators	shttpd.c	/^fix_directory_separators(char *path)$/;"	f	file:
+flags	shttpd.c	/^	unsigned int	flags;			\/* Flags *\/$/;"	m	struct:opt	file:
+flags	shttpd.c	/^	unsigned int	flags;		\/* Flags			*\/$/;"	m	struct:conn	file:
+func	shttpd.c	/^	shttpd_callback_t	func;$/;"	m	struct:userurl	file:
+get_cgi	shttpd.c	/^get_cgi(struct conn *c)$/;"	f	file:
+get_dir	shttpd.c	/^get_dir(struct conn *c)$/;"	f	file:
+get_file	shttpd.c	/^get_file(struct conn *c)$/;"	f	file:
+get_path_info	shttpd.c	/^get_path_info(struct conn *c, char *path)$/;"	f	file:
+getauth	shttpd.c	/^getauth(struct conn *c, struct digest *dig)$/;"	f	file:
+getreqlen	shttpd.c	/^getreqlen(const char *buf, size_t buflen)$/;"	f	file:
+gui	shttpd.c	/^	int		gui;			\/* Show GUI flag *\/$/;"	m	struct:shttpd_ctx	file:
+hIcon	shttpd.c	/^static HICON		hIcon;		\/* SHTTPD icon handle *\/$/;"	v	file:
+hPipe	shttpd.c	/^	HANDLE	hPipe;$/;"	m	struct:threadparam	file:
+handle	shttpd.c	/^	long			handle;$/;"	m	struct:DIR	file:
+handle	shttpd.c	/^handle(struct conn *c)$/;"	f	file:
+handshake	shttpd.c	/^handshake(struct conn *c)$/;"	f	file:
+hdr_type	shttpd.c	/^enum hdr_type	{HDR_DATE, HDR_INT, HDR_STRING};$/;"	g	file:
+head	shttpd.c	/^	size_t	head;			\/* Bytes read		*\/$/;"	m	struct:io	file:
+header	shttpd.c	/^struct header {$/;"	s	file:
+headers	shttpd.c	/^} headers[] = {$/;"	v
+http_method	shttpd.c	/^	int		http_method;	\/* HTTP method			*\/$/;"	m	struct:conn	file:
+huge_html	embed/example.c	/^huge_html(struct shttpd_arg_t *arg)$/;"	f	file:
+ims	shttpd.c	/^	time_t		ims;		\/* If-Modified-Since:		*\/$/;"	m	struct:conn	file:
+in	shttpd.c	/^	unsigned char	in[64];$/;"	m	struct:_MD5Context	file:
+index	shttpd.c	/^	char		*index;			\/* Index files *\/$/;"	m	struct:shttpd_ctx	file:
+index_html	embed/example.c	/^index_html(struct shttpd_arg_t *arg)$/;"	f	file:
+index_html	embed/example_nt_service.cpp	/^index_html(struct shttpd_arg_t *arg)$/;"	f	file:
+inetd	shttpd.c	/^static int		inetd;		\/* Inetd flag *\/$/;"	v	file:
+info	shttpd.c	/^	struct _finddata_t	info;$/;"	m	struct:DIR	file:
+interp	shttpd.c	/^	char		*interp;		\/* CGI script interpreter *\/$/;"	m	struct:shttpd_ctx	file:
+io	shttpd.c	/^	void (*io)(struct conn *);	\/* Local IO function		*\/$/;"	m	struct:conn	file:
+io	shttpd.c	/^struct io {$/;"	s	file:
+io_inc_tail	shttpd.c	/^io_inc_tail(struct io *io, size_t n)$/;"	f	file:
+iscgi	shttpd.c	/^iscgi(struct shttpd_ctx *ctx, const char *path)$/;"	f	file:
+ismountpoint	shttpd.c	/^ismountpoint(struct shttpd_ctx *ctx, const char *url)$/;"	f	file:
+isregistered	shttpd.c	/^isregistered(struct shttpd_ctx *ctx, const char *url)$/;"	f	file:
+kb_in	shttpd.c	/^	unsigned int	kb_in, kb_out;		\/* IN\/OUT traffic counters *\/$/;"	m	struct:shttpd_ctx	file:
+kb_out	shttpd.c	/^	unsigned int	kb_in, kb_out;		\/* IN\/OUT traffic counters *\/$/;"	m	struct:shttpd_ctx	file:
+killdots	shttpd.c	/^killdots(char *file)$/;"	f	file:
+last	embed/shttpd.h	/^	int		last;		\/* Marks the last call *\/$/;"	m	struct:shttpd_arg_t
+len	shttpd.c	/^	size_t		len;		\/* Header name length		*\/$/;"	m	struct:header	file:
+len	shttpd.c	/^	socklen_t len;$/;"	m	struct:usa	file:
+local	shttpd.c	/^	struct io	local;		\/* Local IO buffer		*\/$/;"	m	struct:conn	file:
+location	shttpd.c	/^	char		*location;	\/* Location:			*\/$/;"	m	struct:conn	file:
+log_access	shttpd.c	/^log_access(FILE *fp, const struct conn *c)$/;"	f	file:
+m_Status	embed/example_nt_service.cpp	/^    SERVICE_STATUS m_Status;$/;"	m	class:CNTService	file:
+m_bIsRunning	embed/example_nt_service.cpp	/^    BOOL m_bIsRunning;$/;"	m	class:CNTService	file:
+m_hEventSource	embed/example_nt_service.cpp	/^    HANDLE m_hEventSource;$/;"	m	class:CNTService	file:
+m_hServiceStatus	embed/example_nt_service.cpp	/^    SERVICE_STATUS_HANDLE m_hServiceStatus;$/;"	m	class:CNTService	file:
+m_iMajorVersion	embed/example_nt_service.cpp	/^    int m_iMajorVersion;$/;"	m	class:CNTService	file:
+m_iMinorVersion	embed/example_nt_service.cpp	/^    int m_iMinorVersion;$/;"	m	class:CNTService	file:
+m_pThis	embed/example_nt_service.cpp	/^    static CNTService* m_pThis; \/\/ this code is older than HandlerEx :($/;"	m	class:CNTService	file:
+m_pThis	embed/example_nt_service.cpp	/^CNTService* CNTService::m_pThis = NULL;$/;"	m	class:CNTService	file:
+m_szServiceName	embed/example_nt_service.cpp	/^    char m_szServiceName[64];$/;"	m	class:CNTService	file:
+main	embed/example.c	/^int main(int argc, char *argv[])$/;"	f
+main	embed/example_nt_service.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	embed/scalable.c	/^int main(int argc, char *argv[])$/;"	f
+main	shttpd.c	/^main(int argc, char *argv[])$/;"	f
+md5	shttpd.c	/^md5(char *buf, ...)$/;"	f	file:
+method	shttpd.c	/^	char		method[16];	\/* Used method			*\/$/;"	m	struct:conn	file:
+mime	shttpd.c	/^	char		*mime;		\/* Mime type		*\/$/;"	m	struct:mimetype	file:
+mimetype	shttpd.c	/^struct mimetype {$/;"	s	file:
+mimetypes	shttpd.c	/^	struct mimetype	*mimetypes;		\/* Known mime types *\/$/;"	m	struct:shttpd_ctx	file:
+mkdir	shttpd.c	80;"	d	file:
+montoi	shttpd.c	/^montoi(const char *s)$/;"	f	file:
+mountpoint	shttpd.c	/^	char			*mountpoint;$/;"	m	struct:mountpoint	file:
+mountpoint	shttpd.c	/^struct mountpoint {$/;"	s	file:
+mountpoints	shttpd.c	/^	struct mountpoint *mountpoints;		\/* Aliases *\/$/;"	m	struct:shttpd_ctx	file:
+mutex	shttpd.c	/^	CRITICAL_SECTION mutex;			\/* For MT case *\/$/;"	m	struct:shttpd_ctx	file:
+mysocketpair	shttpd.c	/^mysocketpair(int sp[2])$/;"	f	file:
+mystrdup	shttpd.c	/^mystrdup(const char *str)$/;"	f	file:
+mystrlcpy	shttpd.c	/^mystrlcpy(register char *dst, register const char *src, size_t n)$/;"	f	file:
+nactive	shttpd.c	/^	int		nactive;		\/* # of connections now *\/$/;"	m	struct:shttpd_ctx	file:
+name	shttpd.c	/^	char			*name;$/;"	m	struct:DIR	file:
+name	shttpd.c	/^	char			*name;$/;"	m	struct:envvar	file:
+name	shttpd.c	/^	const char	*name;			\/* Option name in config file *\/$/;"	m	struct:opt	file:
+name	shttpd.c	/^	const char	*name;			\/* SSL function name *\/$/;"	m	struct:ssl_func	file:
+name	shttpd.c	/^	const char	*name;		\/* Header name			*\/$/;"	m	struct:header	file:
+nc	shttpd.c	/^	char		nc[16];$/;"	m	struct:digest	file:
+ncasecmp	shttpd.c	/^ncasecmp(register const char *s1, register const char *s2, size_t len)$/;"	f	file:
+next	embed/scalable.c	/^	struct thread		*next;$/;"	m	struct:thread	file:
+next	shttpd.c	/^	struct conn	*next;		\/* Connections chain		*\/$/;"	m	struct:conn	file:
+next	shttpd.c	/^	struct envvar		*next;$/;"	m	struct:envvar	file:
+next	shttpd.c	/^	struct mimetype	*next;$/;"	m	struct:mimetype	file:
+next	shttpd.c	/^	struct mountpoint	*next;$/;"	m	struct:mountpoint	file:
+next	shttpd.c	/^	struct userauth		*next;$/;"	m	struct:userauth	file:
+next	shttpd.c	/^	struct userurl		*next;$/;"	m	struct:userurl	file:
+nonblock	shttpd.c	/^nonblock(int fd)$/;"	f	file:
+nonce	shttpd.c	/^	char		nonce[33];$/;"	m	struct:digest	file:
+nposted	shttpd.c	/^	unsigned long	nposted;	\/* Emb. POST bytes buffered	*\/$/;"	m	struct:conn	file:
+nrequests	shttpd.c	/^	unsigned int	nrequests;		\/* Requests made *\/$/;"	m	struct:shttpd_ctx	file:
+nsent	shttpd.c	/^	unsigned long	nsent;		\/* Bytes sent to client		*\/$/;"	m	struct:conn	file:
+offset	shttpd.c	/^	size_t		offset;		\/* Where to store a header value*\/$/;"	m	struct:header	file:
+ofs	shttpd.c	/^	size_t		ofs;			\/* Value offset in context *\/$/;"	m	struct:opt	file:
+open_auth_file	shttpd.c	/^open_auth_file(struct shttpd_ctx *ctx, const char *path)$/;"	f	file:
+opendir	shttpd.c	/^opendir(const char *name)$/;"	f	file:
+opt	shttpd.c	/^struct opt {$/;"	s	file:
+options	shttpd.c	/^static struct opt options[] = {$/;"	v	file:
+optset_t	shttpd.c	/^typedef void (*optset_t)(struct shttpd_ctx *, void *ptr, const char *string);$/;"	t	file:
+ouri	shttpd.c	/^	char		ouri[IO_MAX];	\/* Original unmodified URI	*\/$/;"	m	struct:conn	file:
+parse_headers	shttpd.c	/^parse_headers(struct conn *c, char *s)$/;"	f	file:
+parse_request	shttpd.c	/^parse_request(struct conn *c, const char *s)$/;"	f	file:
+pass	shttpd.c	/^	char		*pass;			\/* Global passwords file *\/$/;"	m	struct:shttpd_ctx	file:
+path	shttpd.c	/^	char			*path;$/;"	m	struct:mountpoint	file:
+path	shttpd.c	/^	char		*path;		\/* Path for get_dir		*\/$/;"	m	struct:conn	file:
+path_info	shttpd.c	/^	char		*path_info;	\/* PATH_INFO thing		*\/$/;"	m	struct:conn	file:
+port	shttpd.c	/^	int		port;			\/* Listening port *\/$/;"	m	struct:shttpd_ctx	file:
+priv	embed/shttpd.h	/^	void		*priv;		\/* Do not touch! SHTTPD private. *\/$/;"	m	struct:shttpd_arg_t
+proto	shttpd.c	/^	char		proto[16];	\/* HTTP protocol		*\/$/;"	m	struct:conn	file:
+ptr	shttpd.c	/^	union variant	ptr;			\/* Function pointer *\/$/;"	m	struct:ssl_func	file:
+put_auth	shttpd.c	/^	char		*put_auth;		\/* PUT auth file *\/$/;"	m	struct:shttpd_ctx	file:
+put_dir	shttpd.c	/^put_dir(const char *path)$/;"	f	file:
+put_file	shttpd.c	/^put_file(struct conn *c)$/;"	f	file:
+qop	shttpd.c	/^	char		qop[16];$/;"	m	struct:digest	file:
+query	shttpd.c	/^	char		*query;		\/* QUERY_STRING			*\/$/;"	m	struct:conn	file:
+range	shttpd.c	/^	char		*range;		\/* Range:			*\/$/;"	m	struct:conn	file:
+readdir	shttpd.c	/^readdir(DIR *dir)$/;"	f	file:
+readremote	shttpd.c	/^readremote(struct conn *c, char *buf, size_t len)$/;"	f	file:
+realm	shttpd.c	/^	char		*realm;			\/* Auth realm *\/$/;"	m	struct:shttpd_ctx	file:
+redirect	shttpd.c	/^redirect(struct conn *c, char *interp, char *prog, char *envblk, char **envp)$/;"	f	file:
+referer	shttpd.c	/^	char		*referer;	\/* Referer:			*\/$/;"	m	struct:conn	file:
+remote	shttpd.c	/^	struct io	remote;		\/* Remote IO buffer		*\/$/;"	m	struct:conn	file:
+reqlen	shttpd.c	/^	int		reqlen;		\/* Request length		*\/$/;"	m	struct:conn	file:
+resp	shttpd.c	/^	char		resp[33];$/;"	m	struct:digest	file:
+result	shttpd.c	/^	struct dirent		result;$/;"	m	struct:DIR	file:
+root	shttpd.c	/^	char		root[FILENAME_MAX];	\/* Document root *\/$/;"	m	struct:shttpd_ctx	file:
+run_gui	shttpd.c	/^run_gui(struct shttpd_ctx *ctx)$/;"	f	file:
+s	shttpd.c	/^	SOCKET	s;$/;"	m	struct:threadparam	file:
+sa	shttpd.c	/^		struct sockaddr	sa;$/;"	m	union:usa::<anonymous>	file:
+sa	shttpd.c	/^	struct usa	sa;		\/* Remote socket address	*\/$/;"	m	struct:conn	file:
+save_config	shttpd.c	/^save_config(HWND hDlg, FILE *fp)$/;"	f	file:
+saved	shttpd.c	/^	char		saved[IO_MAX];	\/* Saved request		*\/$/;"	m	struct:conn	file:
+sclength	shttpd.c	/^	unsigned long	sclength;	\/* Server Content-Length	*\/$/;"	m	struct:conn	file:
+secret_html	embed/example.c	/^secret_html(struct shttpd_arg_t *arg)$/;"	f	file:
+send_authorization_request	shttpd.c	/^send_authorization_request(struct conn *c)$/;"	f	file:
+senderr	shttpd.c	/^senderr(struct conn *c, int status, const char *descr,$/;"	f	file:
+serve	shttpd.c	/^serve(struct shttpd_ctx *ctx, void *ptr)$/;"	f	file:
+set_access_log	shttpd.c	/^set_access_log(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_aliases	shttpd.c	/^set_aliases(struct shttpd_ctx *ctx, void *arg, const char *string)$/;"	f	file:
+set_debug	shttpd.c	/^set_debug(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_envvars	shttpd.c	/^set_envvars(struct shttpd_ctx *ctx, void *arg, const char *string)$/;"	f	file:
+set_error_log	shttpd.c	/^set_error_log(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_inetd	shttpd.c	/^set_inetd(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_int	shttpd.c	/^set_int(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_mime	shttpd.c	/^set_mime(struct shttpd_ctx *ctx, void *arg, const char *string)$/;"	f	file:
+set_root	shttpd.c	/^set_root(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+set_ssl	shttpd.c	/^set_ssl(struct shttpd_ctx *ctx, void *arg, const char *pem)$/;"	f	file:
+set_str	shttpd.c	/^set_str(struct shttpd_ctx *ctx, void *ptr, const char *string)$/;"	f	file:
+setopt	shttpd.c	/^setopt(const char *var, const char *val)$/;"	f	file:
+setter	shttpd.c	/^	optset_t	setter;			\/* Option setter function *\/$/;"	m	struct:opt	file:
+shlength	shttpd.c	/^	unsigned long	shlength;	\/* Server headers length	*\/$/;"	m	struct:conn	file:
+show_settings_dialog	shttpd.c	/^show_settings_dialog(struct shttpd_ctx **ctxp)$/;"	f	file:
+shttpd_accept	shttpd.c	/^shttpd_accept(int lsn_sock, int milliseconds)$/;"	f
+shttpd_active	shttpd.c	/^shttpd_active(struct shttpd_ctx *ctx)$/;"	f
+shttpd_add	shttpd.c	/^shttpd_add(struct shttpd_ctx *ctx, int sock)$/;"	f
+shttpd_addmimetype	shttpd.c	/^shttpd_addmimetype(struct shttpd_ctx *ctx, const char *ext, const char *mime)$/;"	f
+shttpd_arg_t	embed/shttpd.h	/^struct shttpd_arg_t {$/;"	s
+shttpd_callback_t	embed/shttpd.h	/^typedef int (*shttpd_callback_t)(struct shttpd_arg_t *);$/;"	t
+shttpd_ctx	shttpd.c	/^struct shttpd_ctx {$/;"	s	file:
+shttpd_fini	shttpd.c	/^shttpd_fini(struct shttpd_ctx *ctx)$/;"	f
+shttpd_get_env	shttpd.c	/^shttpd_get_env(struct shttpd_arg_t *arg, const char *env_name)$/;"	f
+shttpd_get_header	shttpd.c	/^shttpd_get_header(struct shttpd_arg_t *arg, const char *header_name)$/;"	f
+shttpd_get_var	shttpd.c	/^shttpd_get_var(struct shttpd_arg_t *arg, const char *var)$/;"	f
+shttpd_init	shttpd.c	/^shttpd_init(const char *config_file, ...)$/;"	f
+shttpd_listen	shttpd.c	/^shttpd_listen(struct shttpd_ctx *ctx, int sock)$/;"	f
+shttpd_open_port	shttpd.c	/^shttpd_open_port(int port)$/;"	f
+shttpd_poll	shttpd.c	/^shttpd_poll(struct shttpd_ctx *ctx, int milliseconds)$/;"	f
+shttpd_protect_url	shttpd.c	/^shttpd_protect_url(struct shttpd_ctx *ctx, const char *url, const char *file)$/;"	f
+shttpd_register_url	shttpd.c	/^shttpd_register_url(struct shttpd_ctx *ctx,$/;"	f
+shttpd_version	shttpd.c	/^shttpd_version(void)$/;"	f
+shttpd_watch_t	shttpd.c	/^typedef void (*shttpd_watch_t)(struct shttpd_ctx *, void *);$/;"	t	file:
+sigchild	shttpd.c	/^sigchild(int signo)$/;"	f	file:
+sigterm	shttpd.c	/^sigterm(int signo)$/;"	f	file:
+sin	shttpd.c	/^		struct sockaddr_in sin;$/;"	m	union:usa::<anonymous>	file:
+snprintf	embed/example.c	10;"	d	file:
+snprintf	embed/example_nt_service.cpp	8;"	d	file:
+snprintf	shttpd.c	78;"	d	file:
+sock	shttpd.c	/^	int		sock;		\/* Remote socket		*\/$/;"	m	struct:conn	file:
+socklen_t	shttpd.c	/^typedef int socklen_t;$/;"	t	file:
+spawn_new_thread	embed/scalable.c	/^spawn_new_thread(void)$/;"	f	file:
+spawn_stdio_thread	shttpd.c	/^spawn_stdio_thread(int sock, HANDLE hPipe, LPTHREAD_START_ROUTINE func)$/;"	f	file:
+spawncgi	shttpd.c	/^spawncgi(struct conn *c, char *prog)$/;"	f	file:
+ssl	shttpd.c	/^	SSL		*ssl;		\/* SSL descriptor		*\/$/;"	m	struct:conn	file:
+ssl_ctx	shttpd.c	/^	SSL_CTX		*ssl_ctx;		\/* SSL context *\/$/;"	m	struct:shttpd_ctx	file:
+ssl_func	shttpd.c	/^static struct ssl_func {$/;"	s	file:
+ssl_sw	shttpd.c	/^} ssl_sw[] = {$/;"	v	file:
+st	shttpd.c	/^	struct stat	st;		\/* Stats of requested file	*\/$/;"	m	struct:conn	file:
+start_time	shttpd.c	/^	time_t		start_time;		\/* Start time *\/$/;"	m	struct:shttpd_ctx	file:
+state	embed/shttpd.h	/^	void		*state;		\/* User state *\/$/;"	m	struct:shttpd_arg_t
+state	shttpd.c	/^	void		*state;		\/* Embedded. Callback state.	*\/$/;"	m	struct:conn	file:
+status	shttpd.c	/^	int		status;$/;"	m	struct:conn	file:
+stdinput	shttpd.c	/^stdinput(void *arg)$/;"	f	file:
+stdoutput	shttpd.c	/^stdoutput(void *arg)$/;"	f	file:
+sw	shttpd.c	/^	int		sw;			\/* Command line switch *\/$/;"	m	struct:opt	file:
+swtoopt	shttpd.c	/^swtoopt(int sw, const char *name)$/;"	f	file:
+tail	shttpd.c	/^	size_t	tail;			\/* Bytes written	*\/$/;"	m	struct:io	file:
+thread	embed/scalable.c	/^struct thread {$/;"	s	file:
+thread_function	embed/scalable.c	/^static DWORD WINAPI thread_function(void *param)$/;"	f	file:
+thread_function	shttpd.c	/^thread_function(void *param)$/;"	f	file:
+threadparam	shttpd.c	/^struct threadparam {$/;"	s	file:
+threads	embed/scalable.c	/^static struct thread	*threads;	\/* List of worker threads *\/$/;"	v	file:
+tmp	shttpd.c	/^	char		*tmp;			\/* Temporary storage *\/$/;"	m	struct:opt	file:
+type	shttpd.c	/^	enum hdr_type	type;		\/* Header type			*\/$/;"	m	struct:header	file:
+u	shttpd.c	/^	} u;$/;"	m	struct:usa	file:
+uid	shttpd.c	/^	char		*uid;			\/* Run as user *\/$/;"	m	struct:shttpd_ctx	file:
+uint16_t	shttpd.c	/^typedef unsigned short		uint16_t;$/;"	t	file:
+uint32_t	shttpd.c	/^typedef unsigned int		uint32_t;$/;"	t	file:
+uri	shttpd.c	/^	char		uri[IO_MAX];	\/* Url-decoded URI		*\/$/;"	m	struct:conn	file:
+uri	shttpd.c	/^	char		uri[IO_MAX];$/;"	m	struct:digest	file:
+url	shttpd.c	/^	const char		*url;$/;"	m	struct:userauth	file:
+url	shttpd.c	/^	const char		*url;$/;"	m	struct:userurl	file:
+urldecode	shttpd.c	/^urldecode(char *from, char *to)$/;"	f	file:
+urls	shttpd.c	/^	struct userurl	*urls;			\/* User urls *\/$/;"	m	struct:shttpd_ctx	file:
+usa	shttpd.c	/^struct usa {$/;"	s	file:
+usage	shttpd.c	/^usage(const char *prog)$/;"	f	file:
+useindex	shttpd.c	/^useindex(struct conn *c, char *path, size_t maxpath)$/;"	f	file:
+user	shttpd.c	/^	char		*user;		\/* Remote user name		*\/$/;"	m	struct:conn	file:
+user	shttpd.c	/^	char		user[USER_MAX];$/;"	m	struct:digest	file:
+user_data	embed/shttpd.h	/^	void		*user_data;	\/* User-defined data *\/$/;"	m	struct:shttpd_arg_t
+useragent	shttpd.c	/^	char		*useragent;	\/* User-Agent:			*\/$/;"	m	struct:conn	file:
+userauth	shttpd.c	/^struct userauth {$/;"	s	file:
+userurl	shttpd.c	/^	void		*userurl;	\/* For embedded data		*\/$/;"	m	struct:conn	file:
+userurl	shttpd.c	/^struct userurl {$/;"	s	file:
+value	shttpd.c	/^	char			*value;$/;"	m	struct:envvar	file:
+value_func	shttpd.c	/^	void		(*value_func)(void);$/;"	m	union:variant	file:
+value_int	shttpd.c	/^	unsigned long	value_int;$/;"	m	union:variant	file:
+value_str	shttpd.c	/^	char		*value_str;$/;"	m	union:variant	file:
+value_time	shttpd.c	/^	time_t		value_time;$/;"	m	union:variant	file:
+value_void	shttpd.c	/^	void		*value_void;$/;"	m	union:variant	file:
+variant	shttpd.c	/^union variant {$/;"	u	file:
+vars	shttpd.c	/^	char		*vars[NVAR_MAX];	\/* Variables		*\/$/;"	m	struct:conn	file:
+vsnprintf	shttpd.c	79;"	d	file:
+waitpid	shttpd.c	76;"	d	file:
+watch	shttpd.c	/^	shttpd_watch_t	watch;		\/* IO readiness callback	*\/$/;"	m	struct:conn	file:
+watch_data	shttpd.c	/^	void		*watch_data;	\/* Callback data		*\/$/;"	m	struct:conn	file:
+writeremote	shttpd.c	/^writeremote(struct conn *c, const char *buf, size_t len)$/;"	f	file:
+~CNTService	embed/example_nt_service.cpp	/^CNTService::~CNTService()$/;"	f	class:CNTService
