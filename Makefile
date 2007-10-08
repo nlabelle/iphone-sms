@@ -8,9 +8,9 @@ LD=$(CC)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
-iSMS: $(OBJS)
+aSMS: $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -rf $(OBJS) iSMS
+	rm -rf $(OBJS) aSMS
 
