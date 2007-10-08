@@ -167,11 +167,12 @@ int InitConn(int speed)
   term.c_cc[VMIN] = 0;
   term.c_cc[VTIME] = 5;
 
+#if 0
   term.c_iflag = (term.c_iflag & 0xFFFFF0CD) | 5;
   term.c_oflag =  term.c_oflag & 0xFFFFFFFE;
+#endif
   term.c_cflag = (term.c_cflag & 0xFFFC6CFF) | 0x3CB00;
   term.c_lflag =  term.c_lflag & 0xFFFFFA77;
-
   term.c_cflag = (term.c_cflag & ~CSIZE) | CS8;
   term.c_cflag &= ~PARENB;
   term.c_lflag &= ~ECHO;
@@ -280,6 +281,10 @@ int InitConn(int speed)
   // Wait until the output buffer is empty.
   //
   tcdrain (fd);
+  ioctl(fd, TIOCSDTR);
+  ioctl(fd, TIOCCDTR);
+  unsigned int handshake = TIOCM_DTR | TIOCM_RTS | TIOCM_CTS | TIOCM_DSR;
+  ioctl(fd, TIOCMSET, &handshake);
   
   return fd;
 }
@@ -500,7 +505,10 @@ void DecodeAllSMS(int fd)
   printf("Completed.\nEnjoy!\n");
 }
 
+void ReadSMS(int fd)
+{
 
+}
 
 void ReadPB(int fd)
 {
@@ -568,9 +576,11 @@ int main(int argc, char **argv)
   AT(fd);
   SendStrCmd(fd,"ate0\r");
   ReadResp(fd);
-  DeleteAllSMS(fd);
+//  DeleteAllSMS(fd);
 //  ReadPB(fd);
 //  DecodeAllSMS(fd);
+  SendStrCmd(fd,"at+cmgr=0\r");
+  ReadResp(fd);
   close(fd);
   return 0;
 }

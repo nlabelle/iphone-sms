@@ -221,9 +221,14 @@ sms_sim_html (struct shttpd_arg_t *arg)
 		if(date != NULL)
 		    free(date);
 		free(bin);
+	    }else{
+		n += snprintf(arg->buf + n, arg->buflen - n, "<p>LastReceived:<br/>Read Error!</p>");
 	    }
+	free(cmgr0);
 	
-    }
+    }else
+	n += snprintf(arg->buf + n, arg->buflen - n, "<p>LastReceived:<br/>Read Error!</p>");
+	
     char *sms =  ReadSMSList(gsm_modem);
     if(sms)
     {

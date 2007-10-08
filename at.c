@@ -43,8 +43,8 @@
 #define BUFSIZE (65536+100)
 unsigned char readbuf[BUFSIZE];
 
-struct termios term;
-
+static struct termios term;
+static struct termios gOriginalTTYAttrs;
 int InitConn(int speed);
 //#define DEBUG_ENABLED 1
 
@@ -201,6 +201,7 @@ int InitConn(int speed)
     fprintf (stderr, "Could not open serial port %s.\n", "/dev/tty.debug");
     return (0);
   }
+  gOriginalTTYAttrs = buf;
   fcntl(fd, F_SETFL, 0);
 
   //
@@ -277,21 +278,26 @@ int InitConn(int speed)
     fprintf(stderr,"tcsetattr error!\n");
     return -1;
   }
-  ioctl(fd, TIOCSDTR);
-  ioctl(fd, TIOCCDTR);
-  unsigned int handshake = TIOCM_DTR | TIOCM_RTS | TIOCM_CTS | TIOCM_DSR;
-  ioctl(fd, TIOCMSET, &handshake);
   //
   // Wait until the output buffer is empty.
   //
   tcdrain (fd);
+  ioctl(fd, TIOCSDTR);
+  ioctl(fd, TIOCCDTR);
+  unsigned int handshake = TIOCM_DTR | TIOCM_RTS | TIOCM_CTS | TIOCM_DSR;
+  ioctl(fd, TIOCMSET, &handshake);
   
   return fd;
 }
 #endif
-void CloseConn()
+void CloseConn(int fd)
 {
-    
+
+    SendStrCmd(fd,"ate1\r");
+    ReadResp(fd);
+    tcdrain(fd);
+    tcsetattr(fd, TCSANOW, &gOriginalTTYAttrs);
+    close(fd);
 }
 
 void usage(char *prog)
@@ -386,18 +392,14 @@ int SendSMS(int fd, char *to, char *text)
     if(retry > 0)
     {
 	fprintf(stderr,"OK\n");
-	SendStrCmd(fd, "ATE1");
-	ReadResp(fd);
-	close(fd);
+	CloseConn(fd);
 	return 0;//success
     }
     else{
 	fprintf(stderr,"%s: %s\n",at_cmd,readbuf);
 	free(strHex);
     }
-    SendStrCmd(fd, "ATE1");
-    ReadResp(fd);
-    close(fd);
+    CloseConn(fd);
     return -1;//failed
 }
 
@@ -416,29 +418,23 @@ char * ReadSMSList(int fd)
     printf(" Error, empty or too short reply.\n");
     SendStrCmd(fd, "ATE1\r");
     ReadResp(fd);
-    close(fd);
+    CloseConn(fd);
     return NULL;
   }
 
   if (strstr(readbuf + len - 9, "\r\nERROR\r\n")) {
     printf(" ERROR while executing AT+CMGL.\n");
-    SendStrCmd(fd, "ATE1\r");
-    ReadResp(fd);
-    close(fd);
+    CloseConn(fd);
     return NULL;
   }
   if (strstr(readbuf + len - 6, "\r\nOK\r\n")) {
     printf(" OK.\n");
   } else {
     printf(" Unknown error while executing AT+CMGL.\n");
-    SendStrCmd(fd, "ATE1\r");
-    ReadResp(fd);
-    close(fd);
+    CloseConn(fd);
     return NULL;
   }
-    SendStrCmd(fd, "ATE1\r");
-    ReadResp(fd);
-  close(fd);
+  CloseConn(fd);
   return strdup(readbuf);
 }
 
@@ -521,9 +517,7 @@ int ReadPB(int fd)
     SendStrCmd(fd,cmd);
     len = ReadResp(fd);
     fprintf(stderr,"len = %d\n",len);
-    SendStrCmd(fd, "ATE1\r");
-    ReadResp(fd);
-    close(fd);
+    CloseConn(fd);
     return len;
 }
 
@@ -534,6 +528,8 @@ char *ReadSMS(int fd, int idx)
 
     fd = InitConn(115200); 
    AT(fd);
+    SendStrCmd(fd, "ATE0\r");
+    ReadResp(fd);
    sprintf(cmd,"AT+CMGR=%d\r",idx);
   SendStrCmd(fd,cmd);
   len = ReadResp(fd);
@@ -542,11 +538,12 @@ char *ReadSMS(int fd, int idx)
    */
   if (!len || len < 6) {
     printf(" Error, empty or too short reply.\n");
-    close(fd);
+    CloseConn(fd);
     return NULL;
   }
-  close(fd);
-  return readbuf;
+  char *ret = strdup(readbuf);
+  CloseConn(fd);
+  return ret;
 }
 
 #if 0
