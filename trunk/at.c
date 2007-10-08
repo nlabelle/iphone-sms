@@ -46,7 +46,7 @@ unsigned char readbuf[BUFSIZE];
 static struct termios term;
 static struct termios gOriginalTTYAttrs;
 int InitConn(int speed);
-//#define DEBUG_ENABLED 1
+#define DEBUG_ENABLED 1
 
 #ifndef DEBUG_ENABLED
 #define DEBUGLOG(x) 
