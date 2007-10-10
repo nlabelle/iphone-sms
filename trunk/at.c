@@ -149,12 +149,10 @@ int ReadResp(int fd)
   return len;
 }
 
-#if 0
+#if 1
 int InitConn(int speed)
 {
-  int fd = open("/dev/tty.debug", O_RDWR | O_NOCTTY | O_NOCTTY);
-  unsigned int blahnull = 0;
-  unsigned int handshake = TIOCM_DTR | TIOCM_RTS | TIOCM_CTS | TIOCM_DSR;
+  int fd = open("/dev/tty.debug", O_RDWR | O_NOCTTY);
 
   if(fd == -1) {
     fprintf(stderr, "%i(%s)\n", errno, strerror(errno));
@@ -163,24 +161,20 @@ int InitConn(int speed)
 
   ioctl(fd, TIOCEXCL);
   fcntl(fd, F_SETFL, 0);
-  tcgetattr(fd, &term);
 
-  //ioctl(fd, 0x8004540A, &blahnull);
+  tcgetattr(fd, &term);
+  gOriginalTTYAttrs = term;
+
   cfsetspeed(&term, speed);
-  cfmakeraw(&term);
-  term.c_cc[VMIN] = 1;
+  /* Set port settings for canonical input processing */
+  term.c_cflag = CS8 | CLOCAL | CREAD;
+  term.c_iflag = 0;
+  term.c_oflag = 0;
+  term.c_lflag = 0;
+  term.c_cc[VMIN] = 0;
   term.c_cc[VTIME] = 10;
 
-  term.c_cflag = (term.c_cflag & ~CSIZE) | CS8;
-  term.c_cflag &= ~PARENB;
-  term.c_lflag &= ~ECHO;
-  term.c_cflag &= ~CSTOPB;
-
   tcsetattr(fd, TCSANOW, &term);
-
-  ioctl(fd, TIOCSDTR);
-  ioctl(fd, TIOCCDTR);
-  ioctl(fd, TIOCMSET, &handshake);
 
   return fd;
 }

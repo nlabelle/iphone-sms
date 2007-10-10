@@ -21,6 +21,9 @@
   Punishment: Monkeys coming out of your ass Bruce Almighty style.
 
   [1] http://iphone.fiveforty.net/wiki/index.php?title=Main_Page
+  
+  ------
+  add SendSMS ReadSMS ReadPB functions yliqiang@gmail.com 2007-9-29
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,8 +43,9 @@
 #define BUFSIZE (65536+100)
 unsigned char readbuf[BUFSIZE];
 
-struct termios term;
-
+static struct termios term;
+static struct termios gOriginalTTYAttrs;
+int InitConn(int speed);
 #define DEBUG_ENABLED 1
 
 #ifndef DEBUG_ENABLED
@@ -123,7 +127,7 @@ int ReadResp(int fd)
   FD_SET(fd, &readfds);
 
   // Wait a second
-  timeout.tv_sec = 3;
+  timeout.tv_sec = 1;
   timeout.tv_usec = 500000;
 
   fprintf(stderr,"s");
@@ -134,7 +138,7 @@ int ReadResp(int fd)
     len += read(fd, readbuf + len, BUFSIZE - len);
     FD_ZERO(&readfds);
     FD_SET(fd, &readfds);
-    timeout.tv_sec = 1;
+    timeout.tv_sec = 0;
     timeout.tv_usec = 500000;
   }
   if (len > 0) {
@@ -145,43 +149,34 @@ int ReadResp(int fd)
   return len;
 }
 
-#if 0
+#if 1
 int InitConn(int speed)
 {
-  int fd = open("/dev/tty.debug", O_RDWR | 0x20000 | O_NOCTTY);
-  unsigned int blahnull = 0;
-  unsigned int handshake = TIOCM_DTR | TIOCM_RTS | TIOCM_CTS | TIOCM_DSR;
+  int fd = open("/dev/tty.debug", O_RDWR | O_NOCTTY);
 
   if(fd == -1) {
     fprintf(stderr, "%i(%s)\n", errno, strerror(errno));
     exit(1);
   }
 
-  ioctl(fd, 0x2000740D);
-  fcntl(fd, 4, 0);
+  ioctl(fd, TIOCEXCL);
+  fcntl(fd, F_SETFL, 0);
+
   tcgetattr(fd, &term);
+  gOriginalTTYAttrs = term;
 
-  ioctl(fd, 0x8004540A, &blahnull);
-  cfsetspeed(&term, speed);
   cfmakeraw(&term);
-  term.c_cc[VMIN] = 0;
-  term.c_cc[VTIME] = 5;
-
+  cfsetspeed(&term, speed);
+  /* Set port settings for canonical input processing */
+  term.c_cflag = CS8 | CLOCAL | CREAD;
 #if 0
-  term.c_iflag = (term.c_iflag & 0xFFFFF0CD) | 5;
-  term.c_oflag =  term.c_oflag & 0xFFFFFFFE;
+  term.c_iflag = 0;
+  term.c_oflag = 0;
+  term.c_lflag = 0;
+  term.c_cc[VMIN] = 0;
+  term.c_cc[VTIME] = 10;
 #endif
-  term.c_cflag = (term.c_cflag & 0xFFFC6CFF) | 0x3CB00;
-  term.c_lflag =  term.c_lflag & 0xFFFFFA77;
-  term.c_cflag = (term.c_cflag & ~CSIZE) | CS8;
-  term.c_cflag &= ~PARENB;
-  term.c_lflag &= ~ECHO;
-
   tcsetattr(fd, TCSANOW, &term);
-
-  ioctl(fd, TIOCSDTR);
-  ioctl(fd, TIOCCDTR);
-  ioctl(fd, TIOCMSET, &handshake);
 
   return fd;
 }
@@ -202,6 +197,8 @@ int InitConn(int speed)
     fprintf (stderr, "Could not open serial port %s.\n", "/dev/tty.debug");
     return (0);
   }
+  gOriginalTTYAttrs = buf;
+  fcntl(fd, F_SETFL, 0);
 
   //
   // Reset to the serial port to raw mode.
@@ -212,9 +209,8 @@ int InitConn(int speed)
   buf.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
   buf.c_cflag &= ~(CSIZE | PARENB);
   buf.c_cflag |= CS8;
-
-    //buf.c_cflag |= CRTSCTS;
-    //buf.c_cflag &= ~CRTSCTS;
+  buf.c_cc[VMIN] = 1;
+  buf.c_cc[VTIME] = 10;
   //
   // Get the baud rate.
   //
@@ -275,6 +271,7 @@ int InitConn(int speed)
   // Set the new settings for the serial port.
   //
   if (tcsetattr (fd, TCSADRAIN, &buf)) {
+    fprintf(stderr,"tcsetattr error!\n");
     return -1;
   }
   //
@@ -289,6 +286,16 @@ int InitConn(int speed)
   return fd;
 }
 #endif
+void CloseConn(int fd)
+{
+
+    SendStrCmd(fd,"ate1\r");
+    ReadResp(fd);
+    tcdrain(fd);
+    tcsetattr(fd, TCSANOW, &gOriginalTTYAttrs);
+    close(fd);
+}
+
 void usage(char *prog)
 {
   fprintf(stderr, "Usage: %s\n", prog);
@@ -308,7 +315,7 @@ void credit(void)
 
 void SendAT(int fd)
 {
-  SendStrCmd(fd, "AT\r");
+  SendStrCmd(fd, "AT\r\n");
 }
 
 void AT(int fd)
@@ -355,8 +362,9 @@ int SendSMS(int fd, char *to, char *text)
     int len;
     int pdu_len;
     int retry = 10;
-    
-    AT(fd);
+   
+    fd = InitConn(115200); 
+    SetPDUMode(fd);
     len = ComposeSubmitSms(buf, sizeof(buf), to, NULL, text);
     strHex = BinToHex(buf, len);
     pdu_len = strlen(strHex)/2-1;
@@ -380,12 +388,14 @@ int SendSMS(int fd, char *to, char *text)
     if(retry > 0)
     {
 	fprintf(stderr,"OK\n");
+	CloseConn(fd);
 	return 0;//success
     }
     else{
 	fprintf(stderr,"%s: %s\n",at_cmd,readbuf);
 	free(strHex);
     }
+    CloseConn(fd);
     return -1;//failed
 }
 
@@ -394,24 +404,33 @@ char * ReadSMSList(int fd)
   int len = 0;
 
   printf("Reading the SMS list (AT+CMGL)...");
+  fd = InitConn(115200); 
+  AT(fd);
+    SendStrCmd(fd, "ATE0\r");
+    ReadResp(fd);
   SendStrCmd(fd, "AT+CMGL\r");
   len = ReadResp(fd);
   if (!len || len < 9) {
     printf(" Error, empty or too short reply.\n");
+    SendStrCmd(fd, "ATE1\r");
+    ReadResp(fd);
+    CloseConn(fd);
     return NULL;
   }
 
   if (strstr(readbuf + len - 9, "\r\nERROR\r\n")) {
     printf(" ERROR while executing AT+CMGL.\n");
+    CloseConn(fd);
     return NULL;
   }
   if (strstr(readbuf + len - 6, "\r\nOK\r\n")) {
     printf(" OK.\n");
   } else {
     printf(" Unknown error while executing AT+CMGL.\n");
+    CloseConn(fd);
     return NULL;
   }
-
+  CloseConn(fd);
   return strdup(readbuf);
 }
 
@@ -470,47 +489,8 @@ void DeleteAllSMS(int fd)
   printf("Completed.\nEnjoy!\n");
 }
 
-extern LPBYTE HexToBin(LPSTR p, int len);
-extern unsigned char  *ucs2_to_utf8(unsigned short * ucs2_str, int len);
-extern int DecodeSMS (LPBYTE pRecData);
-void DecodeAllSMS(int fd)
-{
-  char * sms = ReadSMSList(fd);
-  if (sms == NULL)
-    return;
 
-  printf("Decode the SMS list...\n");
-  int len = strlen(sms);
-  char * current = NULL;
-  for (current = strstr(sms, "\r\n+CMGL: ");
-    current != NULL && current < sms + len - 1;
-    current = strstr(current + 1, "\r\n+CMGL: ")) {
-
-    int n = 0;
-    int s;
-    int l;
-    char hexStr[1024];
-    sscanf(current, "\r\n+CMGL: %d,%d,,%d\r\n%s", &n, &s,&l,hexStr);
-    if (n == 0) {
-      printf("Could not read SMS number, skipping...\n");
-    } else {
-	printf("Decode %d, state = %d\n",n,s);
-	unsigned char *bin = HexToBin(hexStr,l);
-	DecodeSMS(bin);	
-	free(bin);
-    }
-  }
-  free(sms);
-
-  printf("Completed.\nEnjoy!\n");
-}
-
-void ReadSMS(int fd)
-{
-
-}
-
-void ReadPB(int fd)
+int ReadPB(int fd)
 {
     //get pb entry number;
     //at+cpbr=?
@@ -518,8 +498,11 @@ void ReadPB(int fd)
     unsigned char cmd[64];
     int end;
     int len;
-    char * current = NULL;
-  
+
+    fd = InitConn(115200); 
+    AT(fd);  
+    SendStrCmd(fd, "ATE0\r");
+    ReadResp(fd);
     SendStrCmd(fd,"AT+CSCS=\"UCS2\"\r");
     ReadResp(fd); 
     SendStrCmd(fd,"at+cpbr=?\r");
@@ -529,35 +512,34 @@ void ReadPB(int fd)
     sprintf(cmd,"at+cpbr=1,%d\r",end);
     SendStrCmd(fd,cmd);
     len = ReadResp(fd);
-    for (current = strstr(readbuf, "\r\n+CPBR: ");
-	current != NULL && current < readbuf + len - 1;
-	current = strstr(current + 1, "\r\n+CPBR: ")) {
-	int n,i;
-	unsigned char phone_num[32];
-	unsigned char name[64];
-	unsigned short *ucs2;
-	unsigned char *utf8;	
-	//"\r\n+CPBR: 1,"111111",129,"a"\r\n"
-	sscanf(current, "\r\n+CPBR: %d,\"%[^\"]\",%*d,\"%[^\"]", &n,phone_num,name);
-	fprintf(stderr,"%d, %s, %s\n",n,phone_num,name);
-	for(i=0; i<strlen(phone_num); i++)
-	    fprintf(stderr,"%02X ",phone_num[i]);
-	fprintf(stderr,"\n");
-	for(i=0; i<strlen(name); i++)
-	    fprintf(stderr,"%02X ",name[i]);
-	fprintf(stderr,"\n");
-	ucs2 = (unsigned short *)HexToBin(name,strlen(name));
-	fprintf(stderr,"ucs2: ");
-	for(i=0; i<(strlen(name)/4); i++)
-		fprintf(stderr,"%04X ",ucs2[i]);
-	fprintf(stderr,"\n");
-	utf8 = ucs2_to_utf8(ucs2,strlen(name)/4);
-	free(ucs2);
-	for(i=0; i<strlen(utf8); i++)
-	    fprintf(stderr,"%02X ",utf8[i]);
-	fprintf(stderr,"\n");
-    }
-     
+    fprintf(stderr,"len = %d\n",len);
+    CloseConn(fd);
+    return len;
+}
+
+char *ReadSMS(int fd, int idx)
+{
+    unsigned char cmd[64];
+    int len = 0;
+
+    fd = InitConn(115200); 
+   AT(fd);
+    SendStrCmd(fd, "ATE0\r");
+    ReadResp(fd);
+   sprintf(cmd,"AT+CMGR=%d\r",idx);
+  SendStrCmd(fd,cmd);
+  len = ReadResp(fd);
+  /*+CMGR: 0,,22
+   * 0891683108100005F0040D91683186517521F8000870015030224423026D4B
+   */
+  if (!len || len < 6) {
+    printf(" Error, empty or too short reply.\n");
+    CloseConn(fd);
+    return NULL;
+  }
+  char *ret = strdup(readbuf);
+  CloseConn(fd);
+  return ret;
 }
 
 int main(int argc, char **argv)
@@ -574,12 +556,7 @@ int main(int argc, char **argv)
   fd = InitConn(115200);
 
   AT(fd);
-  SendStrCmd(fd,"ate0\r");
-  ReadResp(fd);
-//  DeleteAllSMS(fd);
-//  ReadPB(fd);
-//  DecodeAllSMS(fd);
-  SendStrCmd(fd,"at+cmgr=0\r");
+  SendStrCmd(fd,"AT+CMGR=0\r\n");
   ReadResp(fd);
   close(fd);
   return 0;
