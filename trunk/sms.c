@@ -88,7 +88,7 @@ index_html (struct shttpd_arg_t *arg)
 		 "<form  method=\"post\">"
 		 "<p>To:"
 		 "<input style=\"font-size:18px\" type=\"text\" size=\"14\" maxlength=\"14\" name=\"phone_num\" value=\"%s\"/>"
-		 "&nbsp;<a href=\"/simpb.html\">PB(SIM)</a></p>"
+		 "&nbsp;<a href=\"/simpb.html\">PhoneBook</a></p>"
 		 "<textarea style=\"font-size:15px\" cols=30 rows=10 name=\"text\">%s</textarea><br/>"
 		 "<input style=\"font-size:15px\" value=\"Send\" type=\"submit\"/></form>",
 		 (phone_num != NULL) ? phone_num : "", (text != NULL) ? text : "");
@@ -116,6 +116,9 @@ simpb_html (struct shttpd_arg_t *arg)
 {
     int n = 0, ret = 0;
     char * current = NULL;
+    char *sr;
+    char *line;
+    int sr_len;
     
     n += snprintf (arg->buf + n, arg->buflen - n, "%s",
 		 "HTTP/1.1 200 OK\r\n"
@@ -124,6 +127,33 @@ simpb_html (struct shttpd_arg_t *arg)
 		 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\"/>"
 		 "<meta name=\"viewport\" content=\"width=320, initial-scale=1.0\" />"
 		 "</head><body>");
+    sr = sqlite_exec("/var/root/Library/AddressBook/AddressBook.sqlitedb","select ROWID,first from ABPerson");
+    sr_len = strlen(sr);
+    n += snprintf(arg->buf + n, arg->buflen - n, "<table border=\"0\" cellpadding=\"5\" align=\"center\">");
+    for(line = sr; line < (sr + sr_len-1); line = strstr(line,"|\n")+2)
+    {
+	    int id;
+	    char name[128];
+	    char *phone;
+	    char sql[256];
+	    sscanf(line,"%d|%[^|]",&id,name);
+	    fprintf(stderr,"id:%d,name:%s\n",id,name);
+	    sprintf(sql,"select value from ABMultiValue where record_id=%d",id);
+	    phone = sqlite_exec("/var/root/Library/AddressBook/AddressBook.sqlitedb",sql);
+	    fprintf(stderr,"phone:%s\n",phone);
+	    if(phone != NULL)
+	    {
+		phone[strlen(phone)-2] = 0;
+		n += snprintf(arg->buf + n, arg->buflen - n, "<tr><td><a href=\"/?phone_num=%s\">%s</a></td><td>%s</td></tr>",
+			name,name,phone
+			);	
+		free(phone);
+	    }
+    }
+    if(sr)
+	free(sr);
+    n += snprintf (arg->buf + n, arg->buflen - n, "</table>");
+    n += snprintf (arg->buf + n, arg->buflen - n, "<p align=\"center\">--------- SIM Card ---------</p>");
     if(cached_pb_len == 0)
     {
 	int pbs_len = ReadPB(gsm_modem);
@@ -302,7 +332,7 @@ sms_html (struct shttpd_arg_t *arg)
     if(box != NULL)
     {
 	if(!strcmp(box,"inbox"))
-	    sprintf(sql,"select address,text,date from message where flags=2 order by date desc");
+	    sprintf(sql,"select address,text,date from message where flags<3 order by date desc");
 	else if(!strcmp(box,"outbox"))
 	    sprintf(sql,"select address,text,date from message where flags=3 order by date desc");
     }
@@ -324,7 +354,11 @@ sms_html (struct shttpd_arg_t *arg)
 	    sr1 = sqlite_exec("/var/root/Library/AddressBook/AddressBook.sqlitedb",sql);
 	    sscanf(sr1,"%d",&id);
 	    free(sr1);
-	    sprintf(sql,"select LastSort from ABPerson where ROWID=%d",id);
+	    sprintf(sql,"select record_id from ABMultiValue where UID=%d",id);
+	    sr1 = sqlite_exec("/var/root/Library/AddressBook/AddressBook.sqlitedb",sql);
+	    sscanf(sr1,"%d",&id);
+	    free(sr1);
+	    sprintf(sql,"select first from ABPerson where ROWID=%d",id);
 	    sr1 = sqlite_exec("/var/root/Library/AddressBook/AddressBook.sqlitedb",sql);
 	    fprintf(stderr,"sr1:%s",sr1);
 	    if(sr1[0] != 0)
@@ -368,6 +402,7 @@ credit_html (struct shttpd_arg_t *arg)
 		 "</head><body>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<ul><li> iPhone dev.team (toolchain, Turbo-smsreset sample code) </li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li><a href=\"http://www.weiphone.com/thread-10508-1-1.html\">hulihutu</a> (find /dev/tty.debug can send SMS success. I try /dev/tty.baseband all day,but failed.) </li>");
+  n += snprintf (arg->buf + n, arg->buflen - n, "<li>special thanks to<a href=\"http://www.iphone.org.hk/cgi-bin/ch/topic_show.cgi?id=1005&pg=1&age=0&bpg=1#6018\">gary</a></li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li><a href=\"http://shttpd.sourceforge.net\">shttpd</a></li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li>and others...</li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "</ul>");
