@@ -1,5 +1,5 @@
 select address,text,date from message order by date desc;
-sqlite> select record_id from ABMultiValue where value="1 (352) 126-1768";
+sqlite> select record_id from ABMultiValue where value="1 -----126-1768";
 2
 sqlite> select LastSort from ABPerson where ROWID=2;
 YANG LIHONG
