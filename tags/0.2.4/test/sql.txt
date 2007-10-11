@@ -1,0 +1,16 @@
+select address,text,date from message order by date desc;
+sqlite> select record_id from ABMultiValue where value="1 -----126-1768";
+2
+sqlite> select LastSort from ABPerson where ROWID=2;
+YANG LIHONG
+sqlite> select ROWID,first from ABPerson;
+1|Liqiang
+2|Lihong
+5|
+sqlite> select UID,value from ABMultiValue;
+1|681557128
+2|126-1768
+5|(895) 409-00
+sqlite> select value from ABMultiValue where UID=1;
++681557128
+
