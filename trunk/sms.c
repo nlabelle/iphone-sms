@@ -412,6 +412,59 @@ credit_html (struct shttpd_arg_t *arg)
   return n;
 }
 
+extern void md5(char *buf, ...);
+static int
+setting_html(struct shttpd_arg_t *arg)
+{
+    int n = 0, ret = 0;
+    char *user,*pass1,*pass2;
+   
+    n += snprintf (arg->buf + n, arg->buflen - n, "%s",
+		 "HTTP/1.1 200 OK\r\n"
+		 "Content-Type: text/html\r\n\r\n"
+		 "<html><head><title>Setting</title>"
+		 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\"/>"
+		 "<meta name=\"viewport\" content=\"width=320, initial-scale=1.0\" />"
+		 "</head><body>");
+    if(user = shttpd_get_var(arg, "user") != NULL)
+    {
+	if(pass1 = shttpd_get_var(arg, "pass1") != NULL)
+ 	{
+		if(pass2 = shttpd_get_var(arg, "pass2") != NULL)
+		{
+			if(!strcmp(pass1,pass2))
+			{
+				n += snprintf (arg->buf + n, arg->buflen - n, "Password Mismatch");
+  				n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+				arg->last = 1;
+  				return n;
+			}
+			char buf[128];
+			md5(buf,user,":","mydomain.com",":",pass1);
+			FILE *fp = fopen("/usr/local/etc/isms/.htpasswd","w+");
+			fprintf(fp,buf);
+			fclose(fp);
+			n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Success.");
+  			n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+			arg->last = 1;
+  			return n;
+		}
+	}
+    }
+    n += snprintf (arg->buf + n, arg->buflen - n,
+		 "<form  method=\"post\">"
+		 "<p>Change Username and Password:</p>"
+		 "<p>User Name:<input type=\"text\" maxlength=\"14\" name=\"user\" value=\"%s\"/></p>"
+		 "<p>Password:<input type=\"password\" maxlength=8 name=\"pass1\" value=\"%s\"/></p>"
+		 "<p>Confirm Password:<input type=\"password\" maxlength=8 name=\"pass2\" value=\"%s\"/></p>"
+		 "<input value=\"Send\" type=\"submit\"/></form>");
+  n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+  arg->last = 1;
+  return n;
+
+	
+}
+
 static int
 api_html(struct shttpd_arg_t *arg)
 {
