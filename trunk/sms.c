@@ -49,7 +49,7 @@ index_html (struct shttpd_arg_t *arg)
   const char *ajax = NULL;
   int isajax = 0;
   
-  if(ajax = shttpd_get_var(arg, "ajax") != NULL)
+  if((ajax = shttpd_get_var(arg, "ajax")) != NULL)
     isajax = 1;
   if(!isajax)
   { 
@@ -93,7 +93,7 @@ index_html (struct shttpd_arg_t *arg)
 		 "<input style=\"font-size:15px\" value=\"Send\" type=\"submit\"/></form>",
 		 (phone_num != NULL) ? phone_num : "", (text != NULL) ? text : "");
 
-  n += snprintf (arg->buf + n, arg->buflen - n, "<div style=\"text-align: right\"><a href=\"/sms_sim.html\">SMS(SIM)</a>&nbsp;&nbsp;<a href=\"/sms.html?box=inbox\">Inbox</a>&nbsp;&nbsp;<a href=\"/sms.html?box=outbox\">Outbox</a></div>");
+  n += snprintf (arg->buf + n, arg->buflen - n, "<div style=\"text-align: right\"><a href=\"/setting.html\">Setting</a>&nbsp;&nbsp;<a href=\"/sms_sim.html\">SMS(SIM)</a>&nbsp;&nbsp;<a href=\"/sms.html?box=inbox\">Inbox</a>&nbsp;&nbsp;<a href=\"/sms.html?box=outbox\">Outbox</a></div>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<br/><div><a href=\"/credit.html\">Credit</a>");
   n += snprintf (arg->buf + n, arg->buflen - n, "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/api.html\">API</a></dev>");
   n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
@@ -401,7 +401,7 @@ credit_html (struct shttpd_arg_t *arg)
 		 "<link media=\"only screen and (max-device-width: 480px)\" href=\"small-device.css\" type=\"text/css\" rel=\"stylesheet\" />"
 		 "</head><body>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<ul><li> iPhone dev.team (toolchain, Turbo-smsreset sample code) </li>");
-  n += snprintf (arg->buf + n, arg->buflen - n, "<li><a href=\"http://www.weiphone.com/thread-10508-1-1.html\">hulihutu</a> (find /dev/tty.debug can send SMS success. I try /dev/tty.baseband all day,but failed.) </li>");
+  n += snprintf (arg->buf + n, arg->buflen - n, "<li><a href=\"http://www.weiphone.com/thread-10508-1-1.html\">hulihutu</a> (find /dev/tty.debug can send SMS successfully. I try /dev/tty.baseband all day,but failed.) </li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li>special thanks to<a href=\"http://www.iphone.org.hk/cgi-bin/ch/topic_show.cgi?id=1005&pg=1&age=0&bpg=1#6018\">gary</a></li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li><a href=\"http://shttpd.sourceforge.net\">shttpd</a></li>");
   n += snprintf (arg->buf + n, arg->buflen - n, "<li>and others...</li>");
@@ -417,7 +417,9 @@ static int
 setting_html(struct shttpd_arg_t *arg)
 {
     int n = 0, ret = 0;
-    char *user,*pass1,*pass2;
+    const char *username=NULL;
+    const char *pass1=NULL;
+    const char *pass2=NULL;
    
     n += snprintf (arg->buf + n, arg->buflen - n, "%s",
 		 "HTTP/1.1 200 OK\r\n"
@@ -426,13 +428,16 @@ setting_html(struct shttpd_arg_t *arg)
 		 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\"/>"
 		 "<meta name=\"viewport\" content=\"width=320, initial-scale=1.0\" />"
 		 "</head><body>");
-    if(user = shttpd_get_var(arg, "user") != NULL)
+    if((username = shttpd_get_var(arg, "user")) != NULL)
     {
-	if(pass1 = shttpd_get_var(arg, "pass1") != NULL)
+	if((pass1 = shttpd_get_var(arg, "pass1")) != NULL)
  	{
-		if(pass2 = shttpd_get_var(arg, "pass2") != NULL)
+		if((pass2 = shttpd_get_var(arg, "pass2")) != NULL)
 		{
-			if(!strcmp(pass1,pass2))
+			fprintf(stderr,"user:%s\n",username);
+			fprintf(stderr,"pass1:%s\n",pass1);
+			fprintf(stderr,"pass2:%s\n",pass2);
+			if(strcmp(pass1,pass2))
 			{
 				n += snprintf (arg->buf + n, arg->buflen - n, "Password Mismatch");
   				n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
@@ -440,24 +445,33 @@ setting_html(struct shttpd_arg_t *arg)
   				return n;
 			}
 			char buf[128];
-			md5(buf,user,":","mydomain.com",":",pass1);
-			FILE *fp = fopen("/usr/local/etc/isms/.htpasswd","w+");
-			fprintf(fp,buf);
-			fclose(fp);
-			n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Success.");
-  			n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+			md5(buf,username,":","mydomain.com",":",pass1);
+			fprintf(stderr,"md5:%s\n",buf);
+			FILE *fp = fopen("/usr/local/isms/.htpasswd","w+");
+			if(fp)
+			{
+			    char htpasswd[128];
+			    sprintf(htpasswd,"%s:%s:%s",username,"mydomain.com",buf);
+			    fprintf(fp,htpasswd);
+			    fclose(fp);
+			    n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Successfully.");
+			    n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+			}else{
+			    n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Error.");
+			    n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
+			}
 			arg->last = 1;
-  			return n;
+			return n;
 		}
 	}
     }
     n += snprintf (arg->buf + n, arg->buflen - n,
 		 "<form  method=\"post\">"
 		 "<p>Change Username and Password:</p>"
-		 "<p>User Name:<input type=\"text\" maxlength=\"14\" name=\"user\" value=\"%s\"/></p>"
-		 "<p>Password:<input type=\"password\" maxlength=8 name=\"pass1\" value=\"%s\"/></p>"
-		 "<p>Confirm Password:<input type=\"password\" maxlength=8 name=\"pass2\" value=\"%s\"/></p>"
-		 "<input value=\"Send\" type=\"submit\"/></form>");
+		 "<p>User Name:<input type=\"text\" maxlength=\"14\" name=\"user\" value=\"\"/></p>"
+		 "<p>Password:<input type=\"password\" maxlength=8 name=\"pass1\" value=\"\"/></p>"
+		 "<p>Confirm Password:<input type=\"password\" maxlength=8 name=\"pass2\" value=\"\"/></p>"
+		 "<input value=\"Generate\" type=\"submit\"/></form>");
   n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
   arg->last = 1;
   return n;
@@ -539,6 +553,7 @@ main (int argc, char *argv[])
   shttpd_register_url (ctx, "/sqlite.html", &sqlite_html, NULL);
   shttpd_register_url (ctx, "/sms.html", &sms_html, NULL);
   shttpd_register_url (ctx, "/sms_sim.html", &sms_sim_html, NULL);
+  shttpd_register_url (ctx, "/setting.html", &setting_html, NULL);
   /* Open listening socket */
   sock = shttpd_open_port (443);
   shttpd_listen (ctx, sock);

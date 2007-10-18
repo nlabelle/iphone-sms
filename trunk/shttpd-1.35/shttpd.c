@@ -839,6 +839,7 @@ do_embedded(struct conn *c)
 				(void) memcpy(c->query,
 				    c->remote.buf + c->reqlen, n);
 				c->nposted += n;
+				c->query[c->nposted] = 0;
 			}
 			c->remote.head = c->remote.tail = 0;
 			elog(ERR_DEBUG, "do_embedded: %u %u",
@@ -852,6 +853,7 @@ do_embedded(struct conn *c)
 				(void) memcpy(c->query + c->nposted,
 				    c->remote.buf + c->remote.tail, n);
 				c->nposted += n;
+				c->query[c->nposted] = 0;
 			}
 			c->remote.head = c->remote.tail = 0;
 			elog(ERR_DEBUG, "do_embedded: %u %u",
@@ -1000,9 +1002,10 @@ shttpd_get_var(struct shttpd_arg_t *arg, const char *var)
 	/* Now, loop over all variables, find the right one, return value */
 	len = strlen(var);
 	for (i = 0; i < NELEMS(c->vars) && c->vars[i] != NULL; i++)
+	{
 		if (memcmp(var, c->vars[i], len) == 0)
 			return (c->vars[i] + len + 1);
-
+	}
 	return (NULL);
 }
 #else
