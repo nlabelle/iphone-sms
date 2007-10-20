@@ -447,17 +447,17 @@ setting_html(struct shttpd_arg_t *arg)
 			char buf[128];
 			md5(buf,username,":","mydomain.com",":",pass1);
 			fprintf(stderr,"md5:%s\n",buf);
-			FILE *fp = fopen("/usr/local/isms/.htpasswd","w+");
+			FILE *fp = fopen("/usr/local/etc/htpasswd","w+");
 			if(fp)
 			{
 			    char htpasswd[128];
 			    sprintf(htpasswd,"%s:%s:%s",username,"mydomain.com",buf);
 			    fprintf(fp,htpasswd);
 			    fclose(fp);
-			    n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Successfully.");
+			    n += snprintf (arg->buf + n, arg->buflen - n, "Reset Password Successfully.");
 			    n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
 			}else{
-			    n += snprintf (arg->buf + n, arg->buflen - n, "Change Password Error.");
+			    n += snprintf (arg->buf + n, arg->buflen - n, "Reset Password Error.");
 			    n += snprintf (arg->buf + n, arg->buflen - n, "</body></html>");
 			}
 			arg->last = 1;
@@ -467,7 +467,7 @@ setting_html(struct shttpd_arg_t *arg)
     }
     n += snprintf (arg->buf + n, arg->buflen - n,
 		 "<form  method=\"post\">"
-		 "<p>Change Username and Password:</p>"
+		 "<p>Reset Username and Password:</p>"
 		 "<p>User Name:<input type=\"text\" maxlength=\"14\" name=\"user\" value=\"\"/></p>"
 		 "<p>Password:<input type=\"password\" maxlength=8 name=\"pass1\" value=\"\"/></p>"
 		 "<p>Confirm Password:<input type=\"password\" maxlength=8 name=\"pass2\" value=\"\"/></p>"
@@ -519,7 +519,7 @@ main (int argc, char *argv[])
   signal (SIGPIPE, SIG_IGN);
 #endif /* !_WIN32 */
 
-  ctx = shttpd_init (NULL, "document_root", "/usr/local/isms", "aliases", "/=/iPhone", "ssl_certificate", "/usr/local/etc/shttpd.pem", NULL);
+  ctx = shttpd_init (NULL, "document_root", "/usr/local/isms", "aliases", "/=/iPhone", "global_htpasswd", "/usr/local/etc/htpasswd","ssl_certificate", "/usr/local/etc/shttpd.pem", NULL);
   
   current_time = time(NULL);
   config_file = CONFIG;
